@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Register • Fake News Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+    <header class="container">
+      <h1>Create Account</h1>
+      <p class="subtitle">Register to personalize your experience</p>
+    </header>
+    <div class="container">
+      <div class="card">
+        <div class="steps"><span class="step active">Register</span><span class="step">Login</span><span class="step">Predict</span></div>
+      </div>
+    </div>
+    <main class="container">
+      <section class="card">
+        {% if error %}
+          <p class="muted" style="color:#dc3545;margin-bottom:10px;">{{ error }}</p>
+        {% endif %}
+        <form method="post" action="{{ url_for('register_submit') }}">
+          <label class="label" for="username">Username</label>
+          <input id="username" name="username" class="input" placeholder="yourname" value="{{ (form.username if form else '') | e }}" />
+
+          <label class="label" for="email">Email (optional)</label>
+          <input id="email" name="email" class="input" type="email" placeholder="you@example.com" value="{{ (form.email if form else '') | e }}" />
+
+          <label class="label" for="mobile">Mobile number</label>
+          <input id="mobile" name="mobile" class="input" type="tel" placeholder="e.g., 9876543210" value="{{ (form.mobile if form else '') | e }}" />
+
+          <label class="label" for="password">Password</label>
+          <input id="password" name="password" class="input" type="password" placeholder="********" />
+
+          <div class="actions">
+            <button class="btn primary" type="submit">Register</button>
+            <a class="btn" href="{{ url_for('login_form') }}">Already have an account? Login</a>
+          </div>
+        </form>
+      </section>
+      <section class="card">
+        <a class="btn" href="{{ url_for('login_form') }}">Go to Login</a>
+      </section>
+    </main>
+    <footer class="container footer">
+      <span>© Fake News Detector • India</span>
+    </footer>
+  </body>
+  </html>

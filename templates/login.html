@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login • Fake News Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+    <header class="container">
+      <h1>Login</h1>
+      <p class="subtitle">Sign in to continue</p>
+    </header>
+    <div class="container">
+      <div class="card">
+        <div class="steps"><span class="step">Register</span><span class="step active">Login</span><span class="step">Predict</span></div>
+      </div>
+    </div>
+    <main class="container">
+      <section class="card">
+        {% if msg %}
+          <p class="muted" style="color:#28a745;margin-bottom:10px;">{{ msg }}</p>
+        {% endif %}
+        {% if error %}<p class="muted" style="color:#dc3545;margin-bottom:10px;">{{ error }}</p>{% endif %}
+        <form method="post" action="{{ url_for('login_submit') }}">
+          <label class="label" for="username">Username</label>
+          <input id="username" name="username" class="input" placeholder="yourname" value="{{ (form.username if form else '') | e }}" />
+
+          <label class="label" for="password">Password</label>
+          <input id="password" name="password" class="input" type="password" placeholder="********" />
+
+          <div class="actions">
+            <button class="btn primary" type="submit">Login</button>
+            <a class="btn" href="{{ url_for('register_form') }}">Create account</a>
+          </div>
+        </form>
+      </section>
+      <section class="card">
+        <a class="btn" href="{{ url_for('predict_page') }}">Go to Prediction</a>
+      </section>
+    </main>
+    <footer class="container footer">
+      <span>© Fake News Detector • India</span>
+    </footer>
+  </body>
+  </html>

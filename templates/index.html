@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fake News Detector (India)</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+    <header class="container">
+      <h1>Fake News Detector</h1>
+      <p class="subtitle">Indian news & Hinglish forwards — check if it's FAKE, TRUE, or OTHER NEWS</p>
+      <div style="margin-top:10px;">
+        {% if user %}
+          <span class="muted">Welcome, {{ user.username }}.</span>
+          <a class="btn" href="{{ url_for('logout') }}" style="margin-left:8px;">Logout</a>
+        {% else %}
+          <a class="btn" href="{{ url_for('login_form') }}">Login</a>
+          <a class="btn" href="{{ url_for('register_form') }}" style="margin-left:8px;">Register</a>
+        {% endif %}
+      </div>
+    </header>
+    <div class="container"><div class="card"><div class="steps"><span class="step">Register</span><span class="step">Login</span><span class="step active">Predict</span></div></div></div>
+
+    <main class="container">
+      <section class="card">
+        <label for="newsInput" class="label">Paste news text, headline and indian news</label>
+        <textarea id="newsInput" class="input" rows="8" placeholder="Type or paste here..."></textarea>
+        <div class="actions">
+          <button id="predictBtn" class="btn primary">Analyze</button>
+          <button id="clearBtn" class="btn">Clear</button>
+        </div>
+      </section>
+
+      <section id="resultCard" class="card result hidden">
+        <h2>Prediction</h2>
+        <div id="predictionBadge" class="badge">—</div>
+        <p id="confidenceText" class="muted">Confidence: —</p>
+      </section>
+    </main>
+
+    <footer class="container footer">
+      <span>© Fake News Detector • India</span>
+      <a href="javascript:void(0)" id="checkServer" title="Ping server">Server status</a>
+      <span id="serverStatus" class="status"></span>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+  </html> 
+  
